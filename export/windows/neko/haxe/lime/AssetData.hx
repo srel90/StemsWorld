@@ -24,6 +24,10 @@ class AssetData {
 			type.set ("assets/data/Stem'sWorld.oep", Reflect.field (AssetType, "text".toUpperCase ()));
 			path.set ("assets/images/coin.png", "assets/images/coin.png");
 			type.set ("assets/images/coin.png", Reflect.field (AssetType, "image".toUpperCase ()));
+			path.set ("assets/images/enemy-0.png", "assets/images/enemy-0.png");
+			type.set ("assets/images/enemy-0.png", Reflect.field (AssetType, "image".toUpperCase ()));
+			path.set ("assets/images/enemy-1.png", "assets/images/enemy-1.png");
+			type.set ("assets/images/enemy-1.png", Reflect.field (AssetType, "image".toUpperCase ()));
 			path.set ("assets/images/forest.png", "assets/images/forest.png");
 			type.set ("assets/images/forest.png", Reflect.field (AssetType, "image".toUpperCase ()));
 			path.set ("assets/images/images-go-here.txt", "assets/images/images-go-here.txt");

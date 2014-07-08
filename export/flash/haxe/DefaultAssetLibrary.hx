@@ -54,6 +54,10 @@ class DefaultAssetLibrary extends AssetLibrary {
 		type.set ("assets/data/Stem'sWorld.oep", AssetType.TEXT);
 		className.set ("assets/images/coin.png", __ASSET__assets_images_coin_png);
 		type.set ("assets/images/coin.png", AssetType.IMAGE);
+		className.set ("assets/images/enemy-0.png", __ASSET__assets_images_enemy_0_png);
+		type.set ("assets/images/enemy-0.png", AssetType.IMAGE);
+		className.set ("assets/images/enemy-1.png", __ASSET__assets_images_enemy_1_png);
+		type.set ("assets/images/enemy-1.png", AssetType.IMAGE);
 		className.set ("assets/images/forest.png", __ASSET__assets_images_forest_png);
 		type.set ("assets/images/forest.png", AssetType.IMAGE);
 		className.set ("assets/images/images-go-here.txt", __ASSET__assets_images_images_go_here_txt);
@@ -83,6 +87,12 @@ class DefaultAssetLibrary extends AssetLibrary {
 		path.set (id, id);
 		type.set (id, AssetType.TEXT);
 		id = "assets/images/coin.png";
+		path.set (id, id);
+		type.set (id, AssetType.IMAGE);
+		id = "assets/images/enemy-0.png";
+		path.set (id, id);
+		type.set (id, AssetType.IMAGE);
+		id = "assets/images/enemy-1.png";
 		path.set (id, id);
 		type.set (id, AssetType.IMAGE);
 		id = "assets/images/forest.png";
@@ -125,6 +135,12 @@ class DefaultAssetLibrary extends AssetLibrary {
 		
 		className.set ("assets/images/coin.png", __ASSET__assets_images_coin_png);
 		type.set ("assets/images/coin.png", AssetType.IMAGE);
+		
+		className.set ("assets/images/enemy-0.png", __ASSET__assets_images_enemy_0_png);
+		type.set ("assets/images/enemy-0.png", AssetType.IMAGE);
+		
+		className.set ("assets/images/enemy-1.png", __ASSET__assets_images_enemy_1_png);
+		type.set ("assets/images/enemy-1.png", AssetType.IMAGE);
 		
 		className.set ("assets/images/forest.png", __ASSET__assets_images_forest_png);
 		type.set ("assets/images/forest.png", AssetType.IMAGE);
@@ -767,6 +783,8 @@ class DefaultAssetLibrary extends AssetLibrary {
 @:keep class __ASSET__assets_data_room_001_oel extends openfl.utils.ByteArray { }
 @:keep class __ASSET__assets_data_stem_sworld_oep extends openfl.utils.ByteArray { }
 @:keep class __ASSET__assets_images_coin_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
+@:keep class __ASSET__assets_images_enemy_0_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
+@:keep class __ASSET__assets_images_enemy_1_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
 @:keep class __ASSET__assets_images_forest_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
 @:keep class __ASSET__assets_images_images_go_here_txt extends openfl.utils.ByteArray { }
 @:keep class __ASSET__assets_images_player_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
@@ -791,6 +809,8 @@ class DefaultAssetLibrary extends AssetLibrary {
 
 
 
+
+
 #elseif (windows || mac || linux)
 
 
@@ -798,6 +818,8 @@ class DefaultAssetLibrary extends AssetLibrary {
 @:file("assets/data/room-001.oel") class __ASSET__assets_data_room_001_oel extends flash.utils.ByteArray {}
 @:file("assets/data/Stem'sWorld.oep") class __ASSET__assets_data_stem_sworld_oep extends flash.utils.ByteArray {}
 @:bitmap("assets/images/coin.png") class __ASSET__assets_images_coin_png extends flash.display.BitmapData {}
+@:bitmap("assets/images/enemy-0.png") class __ASSET__assets_images_enemy_0_png extends flash.display.BitmapData {}
+@:bitmap("assets/images/enemy-1.png") class __ASSET__assets_images_enemy_1_png extends flash.display.BitmapData {}
 @:bitmap("assets/images/forest.png") class __ASSET__assets_images_forest_png extends flash.display.BitmapData {}
 @:file("assets/images/images-go-here.txt") class __ASSET__assets_images_images_go_here_txt extends flash.utils.ByteArray {}
 @:bitmap("assets/images/player.png") class __ASSET__assets_images_player_png extends flash.display.BitmapData {}

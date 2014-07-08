@@ -116,14 +116,19 @@ class Player extends FlxSprite
 			}
 			FlxAngle.rotatePoint(speed, 0, 0, 0, mA, velocity);
 		}else {
-			if (velocity.y<0) {
-				facing = FlxObject.UP;
-			}else if (velocity.x>0) {
-				facing = FlxObject.RIGHT;
-			}else if (velocity.y>0) {
-				facing = FlxObject.DOWN;
-			}else if (velocity.x<0) {
-				facing = FlxObject.LEFT;
+			if (Math.abs(velocity.x) > Math.abs(velocity.y))
+			{
+				if (velocity.x < 0)
+					facing = FlxObject.LEFT;
+				else
+					facing = FlxObject.RIGHT;
+			}
+			else
+			{
+				if (velocity.y < 0)
+					facing = FlxObject.UP;
+				else
+					facing = FlxObject.DOWN;
 			}
 		}
 		

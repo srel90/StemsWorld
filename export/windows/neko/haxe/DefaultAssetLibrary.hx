@@ -54,6 +54,10 @@ class DefaultAssetLibrary extends AssetLibrary {
 		type.set ("assets/data/Stem'sWorld.oep", AssetType.TEXT);
 		path.set ("assets/images/coin.png", "assets/images/coin.png");
 		type.set ("assets/images/coin.png", AssetType.IMAGE);
+		path.set ("assets/images/enemy-0.png", "assets/images/enemy-0.png");
+		type.set ("assets/images/enemy-0.png", AssetType.IMAGE);
+		path.set ("assets/images/enemy-1.png", "assets/images/enemy-1.png");
+		type.set ("assets/images/enemy-1.png", AssetType.IMAGE);
 		path.set ("assets/images/forest.png", "assets/images/forest.png");
 		type.set ("assets/images/forest.png", AssetType.IMAGE);
 		path.set ("assets/images/images-go-here.txt", "assets/images/images-go-here.txt");
@@ -80,6 +84,8 @@ class DefaultAssetLibrary extends AssetLibrary {
 		#if (windows || mac || linux)
 		
 		var useManifest = false;
+		useManifest = true;
+		useManifest = true;
 		useManifest = true;
 		useManifest = true;
 		useManifest = true;
@@ -721,7 +727,11 @@ class DefaultAssetLibrary extends AssetLibrary {
 
 
 
+
+
 #elseif html5
+
+
 
 
 
