@@ -46,12 +46,12 @@ class DefaultAssetLibrary extends AssetLibrary {
 		
 		#if flash
 		
-		path.set ("assets/data/data-goes-here.txt", "assets/data/data-goes-here.txt");
-		type.set ("assets/data/data-goes-here.txt", AssetType.TEXT);
 		path.set ("assets/data/room-001.oel", "assets/data/room-001.oel");
 		type.set ("assets/data/room-001.oel", AssetType.TEXT);
 		path.set ("assets/data/Stem'sWorld.oep", "assets/data/Stem'sWorld.oep");
 		type.set ("assets/data/Stem'sWorld.oep", AssetType.TEXT);
+		path.set ("assets/images/bullet.png", "assets/images/bullet.png");
+		type.set ("assets/images/bullet.png", AssetType.IMAGE);
 		path.set ("assets/images/coin.png", "assets/images/coin.png");
 		type.set ("assets/images/coin.png", AssetType.IMAGE);
 		path.set ("assets/images/enemy-0.png", "assets/images/enemy-0.png");
@@ -60,14 +60,10 @@ class DefaultAssetLibrary extends AssetLibrary {
 		type.set ("assets/images/enemy-1.png", AssetType.IMAGE);
 		path.set ("assets/images/forest.png", "assets/images/forest.png");
 		type.set ("assets/images/forest.png", AssetType.IMAGE);
-		path.set ("assets/images/images-go-here.txt", "assets/images/images-go-here.txt");
-		type.set ("assets/images/images-go-here.txt", AssetType.TEXT);
+		path.set ("assets/images/gibs.png", "assets/images/gibs.png");
+		type.set ("assets/images/gibs.png", AssetType.IMAGE);
 		path.set ("assets/images/player.png", "assets/images/player.png");
 		type.set ("assets/images/player.png", AssetType.IMAGE);
-		path.set ("assets/music/music-goes-here.txt", "assets/music/music-goes-here.txt");
-		type.set ("assets/music/music-goes-here.txt", AssetType.TEXT);
-		path.set ("assets/sounds/sounds-go-here.txt", "assets/sounds/sounds-go-here.txt");
-		type.set ("assets/sounds/sounds-go-here.txt", AssetType.TEXT);
 		path.set ("assets/sounds/beep.ogg", "assets/sounds/beep.ogg");
 		type.set ("assets/sounds/beep.ogg", AssetType.SOUND);
 		path.set ("assets/sounds/flixel.ogg", "assets/sounds/flixel.ogg");
@@ -84,8 +80,6 @@ class DefaultAssetLibrary extends AssetLibrary {
 		#if (windows || mac || linux)
 		
 		var useManifest = false;
-		useManifest = true;
-		useManifest = true;
 		useManifest = true;
 		useManifest = true;
 		useManifest = true;
@@ -727,11 +721,7 @@ class DefaultAssetLibrary extends AssetLibrary {
 
 
 
-
-
 #elseif html5
-
-
 
 
 

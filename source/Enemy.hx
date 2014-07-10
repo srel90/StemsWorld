@@ -4,9 +4,12 @@ import flixel.FlxG;
 import flixel.FlxObject;
 import flixel.FlxSprite;
 import flixel.util.FlxAngle;
+import flixel.util.FlxColor;
 import flixel.util.FlxPoint;
 import flixel.util.FlxRandom;
+import flixel.util.FlxSpriteUtil;
 import flixel.util.FlxVelocity;
+import flixel.plugin.MouseEventManager;
 
 class Enemy extends FlxSprite
 {
@@ -17,6 +20,7 @@ class Enemy extends FlxSprite
 	private var _moveDir:Float;
 	public var seesPlayer:Bool = false;
 	public var playerPos(default, null):FlxPoint;
+	public var flickering:Bool = false;
 	
 	public function new(X:Float=0, Y:Float=0, EType:Int) 
 	{
@@ -33,9 +37,16 @@ class Enemy extends FlxSprite
 		height = 14;
 		offset.x = 4;
 		offset.y = 2;
+		if (etype == 0) {
+			health = 5;
+		}else {
+			health = 10;
+		}
+		
 		_brain = new FSM(idle);
 		_idleTmr = 0;
 		playerPos = FlxPoint.get();
+		MouseEventManager.add(this, onDown, null, onOver, onOut);
 	}
 	
 	override public function update():Void 
@@ -56,9 +67,7 @@ class Enemy extends FlxSprite
 			{
 				_moveDir = -1;
 				velocity.x = velocity.y = 0;
-			}
-			else
-			{
+			}else{
 				_moveDir = FlxRandom.intRanged(0, 4) * 45;
 				FlxAngle.rotatePoint(speed * .5, 0, 0, 0, _moveDir, velocity);
 				
@@ -117,6 +126,49 @@ class Enemy extends FlxSprite
 		}
 			
 		super.draw();
+	}
+	override public function hurt(Damage:Float):Void
+	{
+		if (flickering)
+		{
+			return;
+		}
+		flicker(1.3);
+
+		super.hurt(Damage);
+	}
+	override public function kill():Void
+	{
+		if (!alive)
+		{
+			return;
+		}
+		super.kill();
+		FlxSpriteUtil.flicker(this, 0, 0.02, true);
+		PlayState._gibs.at(this);
+		PlayState._gibs.start(true, 3, 0, 10);
+	}
+
+	private function flicker(Duration:Float):Void
+	{
+		FlxSpriteUtil.flicker(this, Duration, 0.02, true, true, function(_) {
+			flickering = false;
+		});
+		flickering = true;
+	}
+	private function onDown(Sprite:FlxSprite) 
+	{
+		
+		
+	}
+	private function onOver(Sprite:FlxSprite) 
+	{
+		color = 0x00FF00;
+	}
+
+	private function onOut(Sprite:FlxSprite)
+	{
+		color = FlxColor.WHITE;
 	}
 	
 }

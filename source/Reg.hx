@@ -1,5 +1,7 @@
 package;
 
+import flixel.FlxSprite;
+import flixel.util.FlxPoint;
 import flixel.util.FlxSave;
 
 /**
@@ -34,4 +36,7 @@ class Reg
 	 * Especially useful for setting up multiple save slots.
 	 */
 	public static var saves:Array<FlxSave> = [];
+	public static var battleTarget:FlxPoint = null;
+	public static var battleCommand:Bool = false;
+
 }

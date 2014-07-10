@@ -2,6 +2,7 @@ package;
 
 import flixel.addons.display.shapes.FlxShapeCircle;
 import flixel.addons.editors.ogmo.FlxOgmoLoader;
+import flixel.effects.particles.FlxEmitter;
 import flixel.FlxCamera;
 import flixel.FlxG;
 import flixel.FlxObject;
@@ -14,9 +15,13 @@ import flixel.tile.FlxTilemap;
 import flixel.ui.FlxButton;
 import flixel.util.FlxAngle;
 import flixel.util.FlxCollision;
+import flixel.util.FlxColor;
 import flixel.util.FlxDestroyUtil;
 import flixel.util.FlxMath;
 import flixel.util.FlxPoint;
+import flixel.util.FlxSpriteUtil.FillStyle;
+import flixel.util.FlxSpriteUtil.LineStyle;
+import flixel.util.FlxVelocity;
 
 /**
  * A FlxState which can be used for the actual gameplay.
@@ -26,11 +31,16 @@ class PlayState extends FlxState
 	
 	private var _player:Player;
 	private var _map:FlxOgmoLoader;
-	public static var _mWalls:FlxTilemap;
 	private var _mBg:FlxTilemap;
 	private var _grpCoins:FlxTypedGroup<Coin>;
-	private var _grpEnemies:FlxTypedGroup<Enemy>;
+	public static var _mWalls:FlxTilemap;
+	public static var _grpEnemies:FlxTypedGroup<Enemy>;
+	private var _bullets:FlxTypedGroup<Bullet>;
 	
+	private var lineStyle:LineStyle = { color: FlxColor.RED, thickness: 1 };
+	private var fillStyle:FillStyle = { color: FlxColor.TRANSPARENT};
+	
+	public static var _gibs:FlxEmitter;
 	/**
 	 * Function that is called up when to state is created to set it up. 
 	 */
@@ -45,19 +55,32 @@ class PlayState extends FlxState
 		add(_mWalls);
 		
 		
+		
 		_grpCoins = new FlxTypedGroup<Coin>();
 		add(_grpCoins);
+		
 		_grpEnemies = new FlxTypedGroup<Enemy>();
 		add(_grpEnemies);
 		
+		_bullets = new FlxTypedGroup<Bullet>();
+		_bullets.maxSize = 20;
+		add(_bullets);
+		
 		_player = new Player();
-		
+		_player._bullets = _bullets;
 		_map.loadEntities(placeEntities, "entities");
-		
 		add(_player);
 		
-		FlxG.camera.follow(_player, FlxCamera.STYLE_TOPDOWN, null, 1);
+		_gibs = new FlxEmitter();
+		_gibs.setXSpeed( -150, 150);
+		_gibs.setYSpeed( -500, 150);
+		_gibs.setRotation( -720, -720);
+		//_gibs.gravity = 350;
+		_gibs.bounce = 0.5;
+		_gibs.makeParticles(AssetPaths.gibs__png, 10, 10, true, 0.5);
+		add(_gibs);
 		
+		FlxG.camera.follow(_player, FlxCamera.STYLE_TOPDOWN, null, 1);
 		super.create();	
 		
 	}
@@ -89,6 +112,15 @@ class PlayState extends FlxState
 	override public function destroy():Void
 	{
 		super.destroy();
+		_player = null;
+		_map = null;
+		_mBg = null;
+		_grpCoins = null;
+		_mWalls = null;
+		_grpEnemies = null;
+		_bullets = null;
+		lineStyle = null;
+		fillStyle = null;
 	}
 	/**
 	 * Function that is called once every frame.
@@ -99,29 +131,21 @@ class PlayState extends FlxState
 		super.update();
 		
 		FlxG.collide(_player, _mWalls);
-		FlxG.overlap(_player, _grpCoins, playerTouchCoin);
-		FlxG.collide(_grpEnemies, _mWalls);
-		_grpEnemies.forEachAlive(checkEnemyVision);
 		
-		for (i in 0..._grpCoins.length) 
-		{
-			if (FlxCollision.pixelPerfectCheck(_player.circle, _grpCoins.members[i], 1)) {
-				trace("Hit");
-			}
-		}
-	}	
-	private function checkEnemyVision(_):Void
+		FlxG.collide(_grpEnemies, _mWalls);
+		FlxG.collide(_bullets, _mWalls); 
+		FlxG.collide(_gibs, _mWalls);
+		
+		FlxG.overlap(_player, _grpCoins, playerTouchCoin);
+		FlxG.overlap(_bullets, _grpEnemies, overlapped);
+		
+		//_grpEnemies.forEachAlive(checkEnemyVision);	
+	}
+	
+	
+	private function overlapped(Sprite1:FlxObject, Sprite2:FlxObject):Void
 	{
-		for (e in _grpEnemies.members)
-		{
-			if (_mWalls.ray(e.getMidpoint(), _player.getMidpoint()))
-			{
-				e.seesPlayer = true;
-				e.playerPos.copyFrom(_player.getMidpoint());
-			}
-			else
-				e.seesPlayer = false;
-		}
+		Sprite2.hurt(1);
 	}
 	private function playerTouchCoin(P:Player, C:Coin):Void
 	{
